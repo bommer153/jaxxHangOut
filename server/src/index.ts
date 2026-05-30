@@ -127,7 +127,8 @@ app.get('/health', (_req, res) => {
 
 // In production, serve the pre-built React/Phaser client from client/dist.
 if (IS_PROD) {
-  const clientDist = path.resolve(__dirname, '../../client/dist');
+  // __dirname = server/dist/server/src  → go up 4 levels to repo root
+  const clientDist = path.resolve(__dirname, '../../../../client/dist');
   app.use(express.static(clientDist));
   app.get('*', (_req, res) => {
     res.sendFile(path.join(clientDist, 'index.html'));
